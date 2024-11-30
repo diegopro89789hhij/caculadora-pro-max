@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1828/1828884.png"> <!-- Ícono de calculadora -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+
+    .calculator {
+      width: 400px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    .display {
+      background: #222;
+      color: #fff;
+      font-size: 3rem;
+      text-align: right;
+      padding: 20px;
+      height: 80px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: #ccc;
+    }
+
+    button {
+      font-size: 2rem;
+      padding: 20px;
+      background: #f0f0f0;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ddd;
+    }
+
+    button:nth-child(4n) {
+      background: #ff9500;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="deleteLast()">←</button>
+      <button onclick="appendSymbol('%')">%</button>
+      <button onclick="appendSymbol('/')">÷</button>
+      <button onclick="appendNumber(7)">7</button>
+      <button onclick="appendNumber(8)">8</button>
+      <button onclick="appendNumber(9)">9</button>
+      <button onclick="appendSymbol('*')">×</button>
+      <button onclick="appendNumber(4)">4</button>
+      <button onclick="appendNumber(5)">5</button>
+      <button onclick="appendNumber(6)">6</button>
+      <button onclick="appendSymbol('-')">-</button>
+      <button onclick="appendNumber(1)">1</button>
+      <button onclick="appendNumber(2)">2</button>
+      <button onclick="appendNumber(3)">3</button>
+      <button onclick="appendSymbol('+')">+</button>
+      <button onclick="appendNumber(0)">0</button>
+      <button onclick="appendSymbol('.')">.</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="calculateSquareRoot()">√</button> <!-- Raíz cuadrada -->
+      <button onclick="appendSymbol('**')">xʸ</button> <!-- Potenciación -->
+    </div>
+  </div>
+
+  <script>
+    let display = document.getElementById('display');
+
+    function appendNumber(number) {
+      if (display.innerText === '0') {
+        display.innerText = number;
+      } else {
+        display.innerText += number;
+      }
+    }
+
+    function appendSymbol(symbol) {
+      display.innerText += symbol;
+    }
+
+    function clearDisplay() {
+      display.innerText = '0';
+    }
+
+    function deleteLast() {
+      display.innerText = display.innerText.slice(0, -1) || '0';
+    }
+
+    function calculate() {
+      try {
+        display.innerText = eval(display.innerText.replace('÷', '/').replace('×', '*')) || '0';
+      } catch {
+        display.innerText = 'Error';
+      }
+    }
+
+    function calculateSquareRoot() {
+      try {
+        display.innerText = Math.sqrt(eval(display.innerText)) || '0';
+      } catch {
+        display.innerText = 'Error';
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+
+
